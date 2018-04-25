@@ -8,18 +8,29 @@ import java.util.concurrent.CountDownLatch;
 
 public class Receiver
 {
-    public CountDownLatch getLatch()
+
+    @RabbitListener(queues = RabbitlearningApplication.queueName1)
+    public void receiveMessage1(Message message)
     {
-        return latch;
+        System.out.println("Received message on Queue 1: \"" + message.getMessage() + "\"");
     }
 
-    private CountDownLatch latch = new CountDownLatch(1);
-
-    @RabbitListener(queues = RabbitlearningApplication.queueName)
-    public void receiveMessage(Message message)
+    @RabbitListener(queues = RabbitlearningApplication.queueName2)
+    public void receiveMessage2(Message message)
     {
-        System.out.println("Received message: \"" + message.getMessage() + "\"");
-        latch.countDown();
+        System.out.println("Received message on Queue 2: \"" + message.getMessage() + "\"");
+    }
+
+    @RabbitListener(queues = RabbitlearningApplication.queueName3)
+    public void receiveMessage3(Message message)
+    {
+        System.out.println("Received message on Queue 3: \"" + message.getMessage() + "\"");
+    }
+
+    @RabbitListener(queues = "nothing should send here")
+    public void receiveMessage4(Message message)
+    {
+        System.out.println("Received message on Queue 4: \"" + message.getMessage() + "\"");
     }
 
     public Receiver()

@@ -6,6 +6,8 @@ public class Message implements Serializable
 {
     private String message;
 
+    private String routingKey;
+
     public String getMessage()
     {
         return message;
@@ -16,6 +18,16 @@ public class Message implements Serializable
         this.message = message;
     }
 
+    public String getRoutingKey()
+    {
+        return routingKey;
+    }
+
+    public void setRoutingKey(String routingKey)
+    {
+        this.routingKey = routingKey;
+    }
+
     public Message()
     {
 
@@ -24,6 +36,12 @@ public class Message implements Serializable
     public Message(String message)
     {
         this.message = message;
+    }
+
+    public Message(String message, String routingKey)
+    {
+        this.message = message;
+        this.routingKey = routingKey;
     }
 
 }
